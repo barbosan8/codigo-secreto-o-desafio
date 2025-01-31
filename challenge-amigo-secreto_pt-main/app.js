@@ -1,57 +1,50 @@
+let amigos = [];
 
-let amigo = [];
+function adicionarAmigo() {
+  const inputAmigo = document.getElementById("amigo");
+  const nomeAmigo = inputAmigo.value.trim();
 
-function agregarAmigo() {
-    const inputAmigo = document.getElementById("amigo");
-    const nomeAmigo = inputAmigo.value.trim();
+  if (nomeAmigo === "") {
+    alert("Por favor, adicione um nome");
+    return;
+  }
 
-    if (nomeAmigo === "") {
-        alert("por favor, adicione um nome");
-        return;
-    }
-
-    amigo.push(nomeAmigo);
-
-     actualizarlista();
-
-     inputamigo.value = "";
-     inputamigo.focus();
-
-
+  amigos.push(nomeAmigo);
+  atualizarLista();
+  limparCampo(); 
+  inputAmigo.focus();
 }
 
-    function actualizarlista() {
-        const listaAmigoU1 =document.getElementById("listaAmigo")
-        listaAmigoU1.innerHTML = "";
+function limparCampo() {
+  const inputAmigo = document.getElementById('amigo'); 
+  inputAmigo.value = ''; 
+}
 
-        amigos.forEach(amigo => {
-            const li =document.createElement("li");
-            li.textcontent = amigo;
-            listaAmigoU1.appendChild(li);
-      });   
-    }
- 
-    function sortearamigo() {
-        if (amigos.length === 0) {
-            alert("nao ar amigo para sortear. agregar nomes primeiros."); 
-            return
-        }
+function atualizarLista() {
+  const listaDeAmigos = document.getElementById("listaAmigo");
+  listaDeAmigos.innerHTML = "";
 
-        const indiceAleatorio = Math.floor(Math.random() * amigos.length);
+  amigos.forEach((amigo) => {
+    const li = document.createElement("li");
+    li.textContent = amigo;
+    listaDeAmigos.appendChild(li);
+  });
+}
 
-        const amigoSorteado = amigos[indiceAleatorio];
+function sortearAmigo() {
+  if (amigos.length === 0) {
+    alert("Não há amigos para sortear. Adicione nomes primeiro.");
+    return;
+  }
 
-        const resultadoU1 = document.getElementById("resultado");
-        resultadoU1.innerHTML = `<li>${amigoSorteado}</li>`;
+  const indiceAleatorio = Math.floor(Math.random() * amigos.length);
+  const amigoSorteado = amigos[indiceAleatorio];
+  const resultado = document.getElementById("resultado");
 
-    }
+  resultado.innerHTML = `<li>${amigoSorteado}</li>`;
+}
 
-        document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById("btnAdicionar").addEventListener("click", agregarAmigo);
-            document.getElementById("btnSortear").addEventListener("click", sortearamigo);
-         });
-           
-        
- 
-       //  <button id="btnSortear" class="button-draw" aria-label="Sortear amigo secreto">
-     //<input type="text" id="amigo" class="input-name" placeholder="Digite um nome"></input>
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("btnAdicionar").addEventListener("click", adicionarAmigo);
+  document.getElementById("btnSortear").addEventListener("click", sortearAmigo);
+});
